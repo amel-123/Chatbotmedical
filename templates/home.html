@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenue - AI Healthcare</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Global */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #c7d2fe, #e0e7ff);
+        }
+
+        /* Container */
+        .container {
+            background: #ffffff;
+            padding: 50px 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #2646d1;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        /* Buttons */
+        .start-btn {
+            display: block;
+            width: 100%;
+            padding: 15px 0;
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: #2646d1;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(38, 70, 209, 0.3);
+        }
+
+        .start-btn:hover {
+            background: #1b33a6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(38, 70, 209, 0.4);
+        }
+
+        .small {
+            font-size: 13px;
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Healthcare Chatbot</h1>
+        <p>Your intelligent assistant for symptom analysis, medical guidance, and BMI calculation.</p>
+
+        <!-- Bouton Chatbot -->
+        <form action="{{ url_for('chatbot_page') }}" method="get">
+            <button class="start-btn" type="submit">Start Chatbot 🤖</button>
+        </form>
+
+        <!-- Bouton IMC -->
+        <form action="{{ url_for('imc_page') }}" method="get">
+            <button class="start-btn" type="submit">Calculer mon IMC ⚖️</button>
+        </form>
+
+        <p class="small"></p>
+    </div>
+</body>
+</html>
