@@ -1,9 +1,4 @@
-# AI-Health-Chatbot-Web-integration
-AI-Health-Chatbot 🌐💡
-
-<img width="1918" height="989" alt="image" src="https://github.com/user-attachments/assets/5b1a6dd8-e09d-4723-be45-ffccd95dc0ed" />
-
-Ever wondered if Artificial Intelligence can act like a doctor? 🤔 In this project, I built an AI-powered Healthcare Chatbot that predicts diseases from your symptoms using Machine Learning in Python, and I integrated it with a web interface so anyone can interact with it online! 🚑💻
+# Chatbot Medical
 
 Here’s what you’ll see in this end-to-end project:
 ✅ Symptom extraction with NLP – understand what the user inputs
@@ -26,13 +21,8 @@ Deploy your AI model through a simple web interface for user access
 📌 Technologies & Tools Used:
 Python | Scikit-learn | Pandas | NLP | Flask / Streamlit | HTML/CSS | Machine Learning
 
-💬 Perfect for beginners, students, and ML enthusiasts who want to see a full project from scratch. By the end, you’ll have a working AI chatbot deployed on the web, ready to impress in your portfolio.
-
-🔔 Subscribe: @souvikchai for more AI, ML, and Python projects
-📢 Share: Tag your friends interested in Healthcare AI & Data Science!
 
 Open http://127.0.0.1:5000/ in your browser.
-
 
 
 On running the app.py file if nothing happens try this:
