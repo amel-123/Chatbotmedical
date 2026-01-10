@@ -21,14 +21,41 @@
 </html>-->
 
 
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>AI Healthcare Chatbot</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+<body>-->
+  <!-- Phone-like chat container -->
+  <!--<div class="phone-frame">
+    <div class="chat-header">Healthcare Chatbot</div>
+    <div id="chat-box" class="chat-box"></div>
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Type your symptoms..." autocomplete="off">
+      <button id="send-btn">➤</button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>MediConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+      <h2><a href="{{ url_for('home') }}" style="color:white; text-decoration:none;">Accueil</a></h2>
+  </div>
+
   <!-- Phone-like chat container -->
   <div class="phone-frame">
     <div class="chat-header">Healthcare Chatbot</div>
@@ -42,3 +69,4 @@
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
+
