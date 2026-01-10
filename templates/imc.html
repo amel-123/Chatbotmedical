@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -24,8 +25,41 @@
         </form>
 
         {% if result %}
-            <div class="result">{{ result }}</div>
-        {% endif %}
+<div class="result">{{ result }}</div>
+
+{% if doctors_list %}
+<div class="doctor-info">
+
+    <h3 style="margin-bottom: 12px;">👨‍⚕️ Médecins recommandés</h3>
+
+    {% for doc in doctors_list %}
+    <div style="
+        border: 1px solid #e3e3e3;
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+        background: #fafafa;
+        box-shadow: 0 2px 6px rgba(0,0,0,.05);
+    ">
+        <p style="margin: 0; font-weight: 600;">
+            {{ doc.nom }}
+        </p>
+
+        <p style="margin: 6px 0 0;">
+            📍 <strong>Adresse :</strong> {{ doc.adresse }}
+        </p>
+
+        <p style="margin: 4px 0 0;">
+            📞 <strong>Contact :</strong> {{ doc.contact }}
+        </p>
+    </div>
+    {% endfor %}
+
+</div>
+{% endif %}
+
+{% endif %}
+
 
         <br>
         <a href="{{ url_for('home') }}"><button>Retour à l'accueil</button></a>

@@ -137,20 +137,58 @@ def chatbot_page():
     session['step'] = 'welcome'
     return render_template('index.html')
 
+
+# Page IMC
+
+
+# Médecins par catégorie d'IMC
+imc_doctors = {
+    "maigre": [
+        {"nom": "Nutritionniste Salsabil Ben Arfa", "adresse": "Mutuelleville, 22 Rue Oum El Banine, Tunis, Tunisia", "contact": "50 330 220"},
+    ],
+    "normal": [],
+    "surpoids": [
+        {"nom": "Taieb Ben Alaya Nutritionniste -Diététicien", "adresse": "Rue Habib Chatti, Tunis 2092, Tunisie", "contact": "71 874 755"},
+    ],
+    "obese": [
+               {"nom": "Taieb Ben Alaya Nutritionniste -Diététicien", "adresse": "Rue Habib Chatti, Tunis 2092, Tunisie", "contact": "71 874 755"},
+
+    ]
+}
+
 @app.route('/imc', methods=['GET', 'POST'])
 def imc_page():
     result = None
+    doctors_list = []
     if request.method == 'POST':
         try:
             poids = float(request.form['poids'])
-            taille = float(request.form['taille']) / 100
+            taille = float(request.form['taille']) / 100  # convertir cm → m
             imc_val = poids / (taille**2)
-            if imc_val < 18.5: result = f"Votre IMC est {imc_val:.2f} → Maigre"
-            elif imc_val < 25: result = f"Votre IMC est {imc_val:.2f} → Normal"
-            elif imc_val < 30: result = f"Votre IMC est {imc_val:.2f} → Surpoids"
-            else: result = f"Votre IMC est {imc_val:.2f} → Obèse"
-        except: result = "Entrée invalide !"
-    return render_template('imc.html', result=result)
+
+            # Déterminer la catégorie
+            if imc_val < 18.5:
+                category = "maigre"
+                result = f"Votre IMC est {imc_val:.2f} → Maigre"
+            elif imc_val < 25:
+                category = "normal"
+                result = f"Votre IMC est {imc_val:.2f} → Normal"
+            elif imc_val < 30:
+                category = "surpoids"
+                result = f"Votre IMC est {imc_val:.2f} → Surpoids"
+            else:
+                category = "obese"
+                result = f"Votre IMC est {imc_val:.2f} → Obèse"
+
+            # Récupérer la liste des médecins si disponible
+            doctors_list = imc_doctors.get(category, [])
+
+        except:
+            result = "Entrée invalide !"
+
+    return render_template('imc.html', result=result, doctors_list=doctors_list)
+
+
 
 # ------------------ Chat logic ------------------
 @app.route('/chat', methods=['POST'])
