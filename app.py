@@ -5,6 +5,8 @@ from sklearn import preprocessing
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from difflib import get_close_matches
+import qrcode
+import os
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 app = Flask(__name__)
@@ -182,12 +184,56 @@ def imc_page():
 
             # Récupérer la liste des médecins si disponible
             doctors_list = imc_doctors.get(category, [])
+            
+            #ajouter
+            for doc in doctors_list:
+                 doc["qr"] = generate_qr_code(doc)
+
 
         except:
             result = "Entrée invalide !"
 
     return render_template('imc.html', result=result, doctors_list=doctors_list)
 
+def generate_qr_code(doctor):
+    # 1. Nettoyage strict des données
+    nom = str(doctor.get('nom', 'Medecin')).strip()
+    tel = str(doctor.get('contact', '')).replace(' ', '').strip()
+    adr = str(doctor.get('adresse', '')).strip()
+
+    # 2. Format vCard 3.0 avec double champ Nom pour la compatibilité
+    # N:Nom;Prenom;;; est souvent requis par Android
+    # FN:Nom Complet est requis par iOS
+    vcard_content = (
+        "BEGIN:VCARD\n"
+        "VERSION:3.0\n"
+        f"N:;{nom};;;\n"
+        f"FN:{nom}\n"
+        f"TEL;TYPE=CELL:{tel}\n"
+        f"ADR;TYPE=WORK:;;{adr}\n"
+        "END:VCARD"
+    )
+
+    # 3. Création du nom de fichier unique
+    clean_filename = "".join(x for x in nom if x.isalnum()) + ".png"
+    folder = os.path.join(app.static_folder, "qrcodes")
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    
+    path = os.path.join(folder, clean_filename)
+
+    # 4. Suppression de l'ancien fichier pour forcer la mise à jour
+    if os.path.exists(path):
+        os.remove(path)
+
+    # 5. Génération du QR Code
+    qr = qrcode.QRCode(version=1, box_size=10, border=4)
+    qr.add_data(vcard_content)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+    img.save(path)
+
+    return clean_filename
 
 
 # ------------------ Chat logic ------------------
